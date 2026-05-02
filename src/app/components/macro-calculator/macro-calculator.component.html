@@ -1,0 +1,76 @@
+<div class="page-container">
+  <div class="back-nav">
+    <a routerLink="/projetos" class="btn-back">⬅ Voltar para Projetos</a>
+  </div>
+
+  <div class="calculator-container glass-panel">
+  <div class="calculator-header">
+    <h2>Fitness API Demo</h2>
+    <p>Calculadora de Macros conectada ao backend em Python (FastAPI).</p>
+  </div>
+
+  <form (submit)="$event.preventDefault(); calculate()" class="macro-form">
+    <div class="form-group">
+      <label>Peso (kg)</label>
+      <input type="number" [ngModel]="request().peso" (ngModelChange)="request.set({ ...request(), peso: $event })" name="peso" required min="30">
+    </div>
+
+    <div class="form-group">
+      <label>Altura (cm)</label>
+      <input type="number" [ngModel]="request().altura" (ngModelChange)="request.set({ ...request(), altura: $event })" name="altura" required min="100">
+    </div>
+
+    <div class="form-group">
+      <label>Idade</label>
+      <input type="number" [ngModel]="request().idade" (ngModelChange)="request.set({ ...request(), idade: $event })" name="idade" required min="10">
+    </div>
+
+    <div class="form-group">
+      <label>Objetivo</label>
+      <select [ngModel]="request().objetivo" (ngModelChange)="request.set({ ...request(), objetivo: $event })" name="objetivo" required>
+        <option value="perda">Perda de Peso (Déficit)</option>
+        <option value="manutencao">Manutenção</option>
+        <option value="ganho">Ganho de Massa (Superávit)</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn-submit" [disabled]="isLoading()">
+      {{ isLoading() ? 'Calculando...' : 'Calcular Macros' }}
+    </button>
+  </form>
+
+  <div *ngIf="error()" class="error-message">
+    {{ error() }}
+  </div>
+
+  <div *ngIf="result()" class="result-panel fade-in">
+    <h3>Resultado Diário</h3>
+    <div class="result-grid">
+      <div class="macro-card cal">
+        <span class="label">Calorias</span>
+        <span class="value">{{ result()?.calorias_totais }} <small>kcal</small></span>
+      </div>
+      <div class="macro-card prot">
+        <span class="label">Proteínas</span>
+        <span class="value">{{ result()?.proteinas }} <small>g</small></span>
+      </div>
+      <div class="macro-card carb">
+        <span class="label">Carboidratos</span>
+        <span class="value">{{ result()?.carboidratos }} <small>g</small></span>
+      </div>
+      <div class="macro-card fat">
+        <span class="label">Gorduras</span>
+        <span class="value">{{ result()?.gorduras }} <small>g</small></span>
+      </div>
+    </div>
+
+    <div *ngIf="result()?.sugestao_suplemento" class="suggestion-card">
+      <div class="suggestion-icon">✨</div>
+      <div class="suggestion-text">
+        <h4>Recomendação Especial</h4>
+        <p>{{ result()?.sugestao_suplemento }}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

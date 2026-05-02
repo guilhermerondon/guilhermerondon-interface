@@ -1,0 +1,100 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 4rem; /* Padding generoso */
+  /* Fundo translúcido (Glassmorphism) Modern Dark SaaS */
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: none;
+  border-bottom: 1px solid transparent;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &.scrolled {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 4rem; /* Reduz padding levemente */
+  }
+
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem; /* Alinhamento elegante à esquerda */
+    cursor: pointer;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+
+    li a {
+      text-decoration: none;
+      /* Usa a variável de texto com uma leve transparência para o estado normal */
+      color: color-mix(in srgb, var(--text-color) 85%, transparent);
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+
+      /* Efeito de hover e active: Sublinhado elegante */
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--accent-color); /* Dinâmico! */
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+
+      &:hover, &.active {
+        /* Brilho maior no texto */
+        color: var(--text-color);
+        text-shadow: 0 0 12px var(--primary-glow);
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  /* Responsividade limpa para mobile */
+  @media (max-width: 768px) {
+    padding: 1rem 1.5rem;
+    flex-wrap: wrap;
+
+    .logo-wrapper {
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-links {
+      width: 100%;
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links {
+      gap: 0.8rem;
+      li a {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}

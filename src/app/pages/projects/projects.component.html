@@ -1,0 +1,16 @@
+<section class="projects-container">
+  <header>
+    <h1>Meus Projetos</h1>
+    <p>Conheça as soluções Full Stack que desenvolvi, com foco em arquitetura escalável e design moderno.</p>
+  </header>
+
+  <div class="projects-grid">
+    @for (project of projects(); track project.id) {
+      <app-project-card [project]="project"></app-project-card>
+    } @empty {
+      <p>Nenhum projeto encontrado no momento.</p>
+    }
+  </div>
+
+
+</section>

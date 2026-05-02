@@ -1,0 +1,93 @@
+.about-container {
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--primary-color, #2563eb);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+}
+
+.bio-text {
+  p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #e2e8f0;
+    margin-bottom: 1.5rem;
+    
+    strong {
+      color: var(--primary-color, #38bdf8);
+      font-weight: 600;
+    }
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.tech-stack-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
+  h2 {
+    font-size: 1.75rem;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tech-item {
+  padding: 0.5rem 1.25rem;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Efeitos de Glow por tecnologia */
+  &.tech-python:hover { border-color: #60a5fa; color: #60a5fa; box-shadow: 0 0 15px rgba(96, 165, 250, 0.4); }
+  &.tech-csharp:hover { border-color: #c084fc; color: #c084fc; box-shadow: 0 0 15px rgba(192, 132, 252, 0.4); }
+  &.tech-java:hover   { border-color: #fde047; color: #fde047; box-shadow: 0 0 15px rgba(253, 224, 71, 0.4); }
+  &.tech-go:hover     { border-color: #2dd4bf; color: #2dd4bf; box-shadow: 0 0 15px rgba(45, 212, 191, 0.4); }
+  
+  &.tech-docker:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+  &.tech-k8s:hover    { border-color: #3b82f6; color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+  &.tech-azure:hover  { border-color: #60a5fa; color: #60a5fa; box-shadow: 0 0 15px rgba(96, 165, 250, 0.4); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

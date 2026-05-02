@@ -1,0 +1,10 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="logo-wrapper" [routerLink]="'/'">
+    <app-logo></app-logo>
+  </div>
+  <ul class="nav-links">
+    <li><a [routerLink]="'/'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+    <li><a [routerLink]="'/projetos'" routerLinkActive="active">Projetos</a></li>
+    <li><a [routerLink]="'/sobre'" routerLinkActive="active">Sobre</a></li>
+  </ul>
+</nav>
