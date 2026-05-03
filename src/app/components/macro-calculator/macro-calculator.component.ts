@@ -40,7 +40,7 @@ export class MacroCalculatorComponent {
       },
       error: (err) => {
         console.error('Erro ao calcular macros', err);
-        this.error.set('Erro na conexão com a API. Verifique se o servidor está rodando na porta 8000.');
+        this.error.set('Erro na conexão com a API de Macros. Verifique a disponibilidade do serviço.');
         this.isLoading.set(false);
       }
     });
