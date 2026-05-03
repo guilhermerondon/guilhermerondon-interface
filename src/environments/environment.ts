@@ -1,6 +1,6 @@
 export const environment = {
-  production: false,
-  macroApiUrl: 'http://127.0.0.1:8000',
-  infraApiUrl: 'http://localhost:8080/api/monitors',
-  financeApiUrl: 'http://localhost:5074/api/Transactions'
+  production: true,
+  macroApiUrl: 'https://athlete-macro-api.up.railway.app',
+  infraApiUrl: 'https://infra-watchdog-go.up.railway.app/api/monitors',
+  financeApiUrl: 'https://finance-core-ledger.up.railway.app/api/Transactions'
 };

@@ -2,12 +2,13 @@ import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5074/api/auth/login'; // Ajuste a porta se necessário
+  private apiUrl = environment.financeApiUrl.replace('/Transactions', '/auth/login');
   
   // Signal para manter estado em tempo real
   public isLoggedIn = signal<boolean>(false);
