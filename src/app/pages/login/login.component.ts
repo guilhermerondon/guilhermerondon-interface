@@ -30,9 +30,9 @@ import { AuthService } from '../../services/auth.service';
           <button type="submit" [disabled]="isLoading">
             {{ isLoading ? 'Entrando...' : 'Entrar' }}
           </button>
-          
+
           <div class="divider">ou</div>
-          
+
           <button type="button" class="btn-demo" (click)="loginAsGuest()" [disabled]="isLoading">
             Acesso Demonstrativo
           </button>
@@ -195,9 +195,20 @@ export class LoginComponent {
     });
   }
 
-  loginAsGuest() {
-    this.email = 'guest@rondon.com';
-    this.senha = 'Guest@123';
-    this.onSubmit();
-  }
+loginAsGuest() {
+  this.isLoading = true;
+  this.errorMessage = '';
+
+  // AJUSTE: Chama o método específico de demonstração que criamos no AuthService
+  this.authService.loginDemonstrativo().subscribe({
+    next: () => {
+      this.router.navigate(['/finance']);
+    },
+    error: (err) => {
+      this.isLoading = false;
+      this.errorMessage = 'O acesso demonstrativo está temporariamente indisponível.';
+      console.error(err);
+    }
+  });
+}
 }

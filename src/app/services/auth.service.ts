@@ -40,6 +40,9 @@ export class AuthService {
 
   // AJUSTE: Novo método para o botão de Acesso Demonstrativo
   loginDemonstrativo() {
+
+    console.log('🚀 Enviando POST para:', `${this.apiUrl}/demo`);
+
     return this.http.post<{token: string}>(`${this.apiUrl}/demo`, {}).pipe(
       tap(response => {
         if (isPlatformBrowser(this.platformId)) {
