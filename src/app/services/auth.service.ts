@@ -8,23 +8,39 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.financeApiUrl.replace('/Transactions', '/auth/login');
-  
-  // Signal para manter estado em tempo real
+  // AJUSTE: Construção segura da URL para evitar bater na raiz (404)
+  private baseUrl = environment.financeApiUrl.endsWith('/')
+    ? environment.financeApiUrl.slice(0, -1)
+    : environment.financeApiUrl;
+
+  private apiUrl = `${this.baseUrl}/api/Auth`;
+
   public isLoggedIn = signal<boolean>(false);
 
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    // Inicializa o signal checando o localStorage (apenas no browser devido ao SSR)
     if (isPlatformBrowser(this.platformId)) {
       this.isLoggedIn.set(!!localStorage.getItem('token'));
     }
   }
 
+  // Login Padrão
   login(email: string, senha: string) {
-    return this.http.post<{token: string}>(this.apiUrl, { email, senha }).pipe(
+    return this.http.post<{token: string}>(`${this.apiUrl}/login`, { email, senha }).pipe(
+      tap(response => {
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('token', response.token);
+          this.isLoggedIn.set(true);
+        }
+      })
+    );
+  }
+
+  // AJUSTE: Novo método para o botão de Acesso Demonstrativo
+  loginDemonstrativo() {
+    return this.http.post<{token: string}>(`${this.apiUrl}/demo`, {}).pipe(
       tap(response => {
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('token', response.token);
