@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Transaction {
   id: number;
@@ -10,13 +11,12 @@ export interface Transaction {
   type: string;
 }
 
-import { environment } from '../../environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class FinanceService {
-  private apiUrl = environment.financeApiUrl;
+  // AJUSTE: Garanta que a URL aponte para o caminho do Controller (Transactions)
+  private apiUrl = `${environment.financeApiUrl}/api/Transactions`;
   private http = inject(HttpClient);
 
   getTransactions(): Observable<Transaction[]> {
