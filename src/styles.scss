@@ -3,77 +3,79 @@
 /* Variáveis de Design (Tokens) */
 :root {
   --primary-color: #2563eb;
-  --bg-color: #0f172a; /* Padrão escuro */
+  --bg-color: #0f172a;
   --text-color: #f8fafc;
   --card-bg: rgba(30, 41, 59, 0.7);
   --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --primary-glow: rgba(37, 99, 235, 0.3); /* Padrão antigo */
-  --accent-color: #2563eb; /* Padrão antigo */
-  
+  --primary-glow: rgba(37, 99, 235, 0.3);
+  --accent-color: #2563eb;
+
   --project-glow: rgba(37, 99, 235, 0.3);
   --project-accent: #2563eb;
   --project-bg-dim: rgba(15, 23, 42, 0.5);
 }
 
-/* Sub-branding Dinâmico */
+/* Sub-branding Dinâmico (Finance, Fitness, Status) */
 .theme-finance {
   --primary-glow: rgba(79, 70, 229, 0.3);
-  --accent-color: #4f46e5; 
-  --project-glow: rgba(79, 70, 229, 0.3);
-  --project-accent: #4f46e5; /* Indigo */
+  --accent-color: #4f46e5;
+  --project-accent: #4f46e5;
   --project-bg-dim: rgba(30, 27, 75, 0.6);
 }
 
 .theme-fitness {
   --primary-glow: rgba(16, 185, 129, 0.3);
-  --accent-color: #10b981; 
-  --project-glow: rgba(16, 185, 129, 0.3);
-  --project-accent: #10b981; /* Esmeralda */
+  --accent-color: #10b981;
+  --project-accent: #10b981;
   --project-bg-dim: rgba(6, 78, 59, 0.6);
 }
 
 .theme-status {
   --primary-glow: rgba(20, 184, 166, 0.3);
   --accent-color: #14b8a6;
-  --project-glow: rgba(20, 184, 166, 0.3);
-  --project-accent: #14b8a6; /* Teal */
+  --project-accent: #14b8a6;
   --project-bg-dim: rgba(8, 51, 68, 0.6);
 }
 
-/* Reset Global */
-html {
-  scroll-behavior: smooth;
-}
-
+/* Reset Global e Safe Areas */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* Garante que o fundo cubra toda a área no iOS */
+  background-color: #000000;
+}
+
 body {
   font-family: var(--font-main);
-  /* Background linear-gradient moderno (Nebulosa Animada) */
   background: linear-gradient(-45deg, #0f172a, #1e1b4b, #000000, #0f172a);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   background-attachment: fixed;
   color: var(--text-color);
   line-height: 1.6;
-  min-height: 100vh;
+
+  /* --- AJUSTE PARA IPHONE (SAFE AREAS) --- */
+  min-height: 100dvh; /* Dynamic Viewport Height para mobile */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
-/* Animação suave para o fundo nebulosa */
+/* Animações */
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Animação global de fade-in-up para as páginas */
-.fade-in-up,
-app-home, app-about, app-projects {
+.fade-in-up, app-home, app-about, app-projects {
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   display: block;
 }
@@ -89,7 +91,7 @@ app-home, app-about, app-projects {
   }
 }
 
-/* Ajuste rápido para seu grid não ficar colado nas bordas */
+/* Container Responsivo */
 .home-container {
   padding: 2rem;
   max-width: 1000px;
