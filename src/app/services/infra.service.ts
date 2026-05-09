@@ -24,7 +24,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class InfraService {
-  private apiUrl = environment.infraApiUrl;
+  private apiUrl = environment.watchdogApiUrl;
   private http = inject(HttpClient);
 
   getMonitors(): Observable<Monitor[]> {
