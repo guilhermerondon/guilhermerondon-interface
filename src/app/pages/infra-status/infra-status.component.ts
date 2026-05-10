@@ -56,15 +56,20 @@ interface MonitorView extends Monitor {
             </div>
           </div>
         } @empty {
-          <div *ngIf="!isLoading()" class="empty-state" style="grid-column: 1 / -1; text-align: center; color: #aaa;">
+          <div *ngIf="!isLoading()" class="empty-state-enhanced" style="grid-column: 1 / -1;">
+            <div class="empty-icon">📡</div>
             <p>Nenhum monitor configurado no momento.</p>
+            <span class="empty-sub">Aguardando o primeiro pulso do motor de monitoramento (Go).</span>
+            <button class="btn-retry" (click)="ngOnInit()">Verificar Conectividade Agora</button>
           </div>
         }
       </div>
       
-      <div *ngIf="isLoading()" class="loading-state">
-        <div class="spinner"></div>
-        <p>Conectando ao motor de monitoramento (Go)...</p>
+      <div *ngIf="isLoading()" class="loading-state-overlay">
+        <div class="loading-content">
+          <div class="pulse-loader"></div>
+          <p>Sincronizando com a Infraestrutura...</p>
+        </div>
       </div>
     </div>
   `,
@@ -256,21 +261,81 @@ interface MonitorView extends Monitor {
     .block-success { background: #10b981; }
     .block-error { background: #ef4444; }
 
-    .loading-state {
-      grid-column: 1 / -1;
+    .empty-state-enhanced {
       text-align: center;
-      padding: 4rem;
-      color: #aaa;
+      padding: 5rem 2rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 20px;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .spinner {
-      border: 3px solid rgba(255, 255, 255, 0.1);
+    .empty-icon {
+      font-size: 4rem;
+      filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+      margin-bottom: 1rem;
+    }
+
+    .empty-state-enhanced p {
+      color: #fff;
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .empty-sub {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .btn-retry {
+      margin-top: 1rem;
+      background: rgba(6, 182, 212, 0.15);
+      color: #06b6d4;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-retry:hover {
+      background: rgba(6, 182, 212, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .loading-state-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-content {
+      text-align: center;
+      color: #fff;
+    }
+
+    .pulse-loader {
+      width: 60px;
+      height: 60px;
+      background: var(--project-accent, #06b6d4);
       border-radius: 50%;
-      border-top: 3px solid var(--project-accent, #a78bfa);
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 1rem auto;
+      margin: 0 auto 1.5rem auto;
+      animation: pulse-ring 1.5s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(0.1); opacity: 1; }
+      70% { transform: scale(1); opacity: 0; }
+      100% { transform: scale(1.2); opacity: 0; }
     }
 
     @keyframes spin { 100% { transform: rotate(360deg); } }

@@ -109,6 +109,7 @@
       justify-content: center;
       margin-top: 1rem;
       gap: 1.5rem;
+      flex-wrap: wrap; /* Garante que não quebre layout se houver muitos links */
     }
   }
 
