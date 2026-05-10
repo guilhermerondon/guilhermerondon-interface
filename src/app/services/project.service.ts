@@ -9,19 +9,19 @@ export class ProjectService {
     return [
       {
         id: 1,
-        title: 'Fitness API',
-        description: 'Foco em Pydantic e Lógica de Macros.',
+        title: 'Athlete: Gestão de Macros',
+        description: 'Controle preciso de macronutrientes e calorias para otimizar seus resultados físicos e performance nos treinos.',
         technology: 'FastAPI',
         language: 'Python',
         infra: 'Docker / PostgreSQL',
         repoUrl: 'https://github.com/guilhermerondon/athlete-macro-api',
-        imageUrl: 'assets/images/fitness-form.jpg',
+        imageUrl: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80',
         previewUrl: 'assets/previews/fitness-api.webm'
       },
       {
         id: 2,
-        title: 'Finance Ledger',
-        description: 'Repository Pattern, EF Core e Segurança com JWT.',
+        title: 'Gestor Financeiro Pessoal',
+        description: 'Organização inteligente de receitas e despesas com foco em segurança de dados e simplicidade na gestão do capital.',
         technology: '.NET 8',
         language: 'C#',
         infra: 'Azure / SQL Server',
@@ -31,8 +31,8 @@ export class ProjectService {
       },
       {
         id: 3,
-        title: 'Uptime Monitor',
-        description: 'Alta performance com Goroutines e monitoramento real-time.',
+        title: 'Monitor de Saúde de Infra',
+        description: 'Acompanhamento em tempo real da disponibilidade dos seus serviços para garantir máxima estabilidade e performance.',
         technology: 'Gin',
         language: 'Go',
         infra: 'Performance / SQLite',
