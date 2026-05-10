@@ -1,4 +1,5 @@
-import { Component, OnInit, signal, inject, computed, HostBinding } from '@angular/core';
+import { Component, OnInit, signal, inject, computed, HostBinding, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FinanceService, Transaction } from '../../services/finance.service';
@@ -648,6 +649,7 @@ export class FinanceDashboardComponent implements OnInit {
   };
 
   private financeService = inject(FinanceService);
+  private document = inject(DOCUMENT);
 
   ngOnInit() {
     this.loadTransactions();
@@ -681,6 +683,15 @@ export class FinanceDashboardComponent implements OnInit {
     } else if (!this.editTxId()) {
       this.resetForm();
     }
+    this.updateBodyScroll();
+  }
+
+  updateBodyScroll() {
+    if (this.showModal() || this.showConfirmDelete()) {
+      this.document.body.classList.add('modal-open');
+    } else {
+      this.document.body.classList.remove('modal-open');
+    }
   }
 
   resetForm() {
@@ -708,11 +719,13 @@ export class FinanceDashboardComponent implements OnInit {
   confirmDelete(id: number) {
     this.pendingDeleteId.set(id);
     this.showConfirmDelete.set(true);
+    this.updateBodyScroll();
   }
 
   cancelDelete() {
     this.showConfirmDelete.set(false);
     this.pendingDeleteId.set(null);
+    this.updateBodyScroll();
   }
 
   executeDelete() {
