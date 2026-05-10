@@ -70,6 +70,29 @@
         }
       }
     }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+
+      a {
+        font-size: 1.4rem;
+        color: color-mix(in srgb, var(--text-color) 85%, transparent);
+        transition: all 0.3s ease;
+        padding: 0;
+
+        &:hover {
+          color: #0077b5; /* Cor oficial LinkedIn */
+          transform: translateY(-2px);
+          text-shadow: 0 0 15px rgba(0, 119, 181, 0.5);
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
   }
 
   /* Responsividade limpa para mobile */
