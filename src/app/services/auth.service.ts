@@ -45,7 +45,7 @@ export class AuthService {
       tap(response => {
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('token', response.token);
-          this.isLoggedIn.set(true);
+          this.isLoggedIn.set(true); // Atualização imediata
         }
       })
     );

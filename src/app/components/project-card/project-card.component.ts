@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { Project } from '../../models/project.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-project-card',
@@ -15,6 +16,27 @@ export class ProjectCardComponent {
   @Input({ required: true }) project!: Project;
   
   isHovered = signal(false);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  navigateToProject() {
+    if (this.project.id === 2) {
+      // Gestor Financeiro exige Login
+      if (this.authService.getToken()) {
+        this.router.navigate(['/finance']);
+      } else {
+        // Se não logado, faz login anônimo automático
+        this.authService.loginDemonstrativo().subscribe({
+          next: () => this.router.navigate(['/finance']),
+          error: () => this.router.navigate(['/login']) // Fallback caso o endpoint falhe
+        });
+      }
+    } else if (this.project.id === 1) {
+      this.router.navigate(['/fitness-api']);
+    } else if (this.project.id === 3) {
+      this.router.navigate(['/status']);
+    }
+  }
 
   isVideo(url?: string): boolean {
     if (!url) return false;
