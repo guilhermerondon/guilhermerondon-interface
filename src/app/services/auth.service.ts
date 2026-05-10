@@ -22,11 +22,8 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      // Forçamos um token fake no localStorage se não houver
-      if (!localStorage.getItem('token')) {
-        localStorage.setItem('token', 'fake-jwt-token-for-stabilization');
-      }
-      this.isLoggedIn.set(true);
+      const token = localStorage.getItem('token');
+      this.isLoggedIn.set(!!token);
     }
   }
 
@@ -42,12 +39,9 @@ export class AuthService {
     );
   }
 
-  // AJUSTE: Novo método para o botão de Acesso Demonstrativo
+  // AJUSTE: Novo método para o botão de Acesso Demonstrativo (Gera Sandbox Isolada)
   loginDemonstrativo() {
-
-    console.log('🚀 Enviando POST para:', `${this.apiUrl}/demo`);
-
-    return this.http.post<{token: string}>(`${this.apiUrl}/demo`, {}).pipe(
+    return this.http.post<{token: string}>(`${this.apiUrl}/anonymous`, {}).pipe(
       tap(response => {
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('token', response.token);

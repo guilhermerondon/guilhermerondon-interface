@@ -3,6 +3,13 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  // BYPASS: Permitir navegação direta para estabilização da UI
-  return true;
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.getToken()) {
+    return true;
+  }
+
+  router.navigate(['/projetos']);
+  return false;
 };
