@@ -28,10 +28,10 @@ export class InfraService {
   private http = inject(HttpClient);
 
   getMonitors(): Observable<Monitor[]> {
-    return this.http.get<Monitor[]>(this.apiUrl);
+    return this.http.get<Monitor[]>(`${this.apiUrl}/api/monitors`);
   }
 
   getMonitorHistory(id: number): Observable<UptimeLog[]> {
-    return this.http.get<UptimeLog[]>(`${this.apiUrl}/${id}/history`);
+    return this.http.get<UptimeLog[]>(`${this.apiUrl}/api/monitors/${id}/history`);
   }
 }
