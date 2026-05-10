@@ -28,6 +28,15 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       transition(':leave', [
         animate('250ms ease-in', style({ opacity: 0 }))
       ])
+    ]),
+    trigger('scaleInOut', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.8)' }),
+        animate('300ms cubic-bezier(0.175, 0.885, 0.32, 1.275)', style({ opacity: 1, transform: 'scale(1)' }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ opacity: 0, transform: 'scale(0.8)' }))
+      ])
     ])
   ],
   template: `
@@ -140,6 +149,20 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
           </button>
         </div>
       </form>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal-container" *ngIf="showConfirmDelete()" @fadeInOut>
+      <div class="modal-content" @scaleInOut>
+        <div class="modal-icon">⚠️</div>
+        <h3>Confirmar Exclusão</h3>
+        <p>Tem certeza que deseja remover esta transação? Esta ação não pode ser desfeita.</p>
+        
+        <div class="modal-actions">
+          <button class="btn-cancel-modal" (click)="cancelDelete()">Manter</button>
+          <button class="btn-confirm-delete" (click)="executeDelete()">Excluir Agora</button>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
@@ -481,6 +504,80 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       text-shadow: 0 0 8px rgba(248, 113, 113, 0.8);
       transform: scale(1.05);
     }
+  
+    /* Estilos do Modal de Confirmação */
+    .modal-container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .modal-content {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .modal-content p {
+      color: #94a3b8;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-cancel-modal {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 0.8rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-confirm-delete {
+      flex: 1;
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+      border: none;
+      color: #fff;
+      padding: 0.8rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-cancel-modal:hover { background: rgba(255, 255, 255, 0.1); }
+    .btn-confirm-delete:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4); }
   `]
 })
 export class FinanceDashboardComponent implements OnInit {
@@ -490,6 +587,8 @@ export class FinanceDashboardComponent implements OnInit {
   isLoading = signal<boolean>(true);
   
   showModal = signal<boolean>(false);
+  showConfirmDelete = signal<boolean>(false);
+  pendingDeleteId = signal<number | null>(null);
   isSaving = signal<boolean>(false);
   errorMsg = signal<string>('');
   editTxId = signal<number | null>(null);
@@ -607,17 +706,30 @@ export class FinanceDashboardComponent implements OnInit {
   }
 
   confirmDelete(id: number) {
-    if (confirm('Tem certeza que deseja excluir esta transação?')) {
-      this.financeService.deleteTransaction(id).subscribe({
-        next: () => {
-          this.transactions.update(txs => txs.filter(t => t.id !== id));
-        },
-        error: (err) => {
-          console.error('Erro ao excluir:', err);
-          alert('Não foi possível excluir a transação.');
-        }
-      });
-    }
+    this.pendingDeleteId.set(id);
+    this.showConfirmDelete.set(true);
+  }
+
+  cancelDelete() {
+    this.showConfirmDelete.set(false);
+    this.pendingDeleteId.set(null);
+  }
+
+  executeDelete() {
+    const id = this.pendingDeleteId();
+    if (!id) return;
+
+    this.financeService.deleteTransaction(id).subscribe({
+      next: () => {
+        this.transactions.update(txs => txs.filter(t => t.id !== id));
+        this.cancelDelete();
+      },
+      error: (err) => {
+        console.error('Erro ao excluir:', err);
+        alert('Não foi possível excluir a transação.');
+        this.cancelDelete();
+      }
+    });
   }
 
   saveTransaction() {

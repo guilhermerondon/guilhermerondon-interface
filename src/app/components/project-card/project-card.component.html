@@ -41,8 +41,11 @@
       <a *ngIf="project.id === 3" [routerLink]="['/status']" class="btn-action btn-demo">
         ▶ Ver Status de Infra
       </a>
+      <button *ngIf="project.previewUrl" class="btn-action btn-play" (click)="$event.stopPropagation()" title="Ver Demonstração">
+        <i class="fas fa-play-circle"></i> Demo
+      </button>
       <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer" class="btn-action btn-repo">
-        GitHub
+        <i class="fab fa-github"></i> GitHub
       </a>
     </div>
   </div>
