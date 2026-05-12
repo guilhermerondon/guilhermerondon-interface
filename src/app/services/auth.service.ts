@@ -1,4 +1,4 @@
-import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, signal, inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { tap } from 'rxjs';
@@ -17,10 +17,10 @@ export class AuthService {
 
   public isLoggedIn = signal<boolean>(true);
 
-  constructor(
-    private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+  private http = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
+
+  constructor() {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
       this.isLoggedIn.set(!!token);
