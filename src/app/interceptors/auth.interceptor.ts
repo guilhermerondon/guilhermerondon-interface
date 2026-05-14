@@ -1,23 +1,37 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const platformId = inject(PLATFORM_ID);
+  const router = inject(Router);
   
+  let authReq = req;
+
   if (isPlatformBrowser(platformId)) {
     const token = localStorage.getItem('token');
     
     if (token) {
-      const clonedReq = req.clone({
+      authReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
-      return next(clonedReq);
     }
   }
   
-  return next(req);
+  return next(authReq).pipe(
+    catchError((error: any) => {
+      if (error instanceof HttpErrorResponse && error.status === 401) {
+        if (isPlatformBrowser(platformId)) {
+          localStorage.removeItem('token');
+          router.navigate(['/login']);
+        }
+      }
+      return throwError(() => error);
+    })
+  );
 };
