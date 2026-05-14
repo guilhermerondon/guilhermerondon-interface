@@ -8,12 +8,12 @@
   flex-direction: column;
   height: 100%;
   
-  /* Glassmorphism SaaS Escuro */
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  /* Obsidian Minimalist Style */
+  background: #0d0d0d;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #1f1f1f;
+  border-radius: 12px;
   
   /* Sombra sutil para profundidade */
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
@@ -144,7 +144,7 @@
 .project-description {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #94a3b8; /* Slate-400 para texto secundário elegante */
+  color: #a0a0a0; /* Cinza Prata Obsidian */
   margin: 0;
 }
 
