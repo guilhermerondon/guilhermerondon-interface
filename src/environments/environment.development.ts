@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  macroApiUrl: 'https://athlete-macro-api-production.up.railway.app',
-  watchdogApiUrl: 'https://infra-watchdog-go-production.up.railway.app/api/monitors',
-  financeApiUrl: 'https://finance-core-ledger-production.up.railway.app/api/Transactions'
+  macroApiUrl: 'https://fitness-api-free.onrender.com',
+  watchdogApiUrl: 'https://uptime-watchdog-free.onrender.com',
+  financeApiUrl: 'https://finance-core-ledger-free.onrender.com'
 };
