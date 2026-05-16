@@ -31,11 +31,12 @@ import { AuthService } from '../../services/auth.service';
             {{ isLoading ? 'Entrando...' : 'Entrar' }}
           </button>
 
+          <!-- 
           <div class="divider">ou</div>
-
           <button type="button" class="btn-demo" (click)="loginAsGuest()" [disabled]="isLoading">
             Acesso Demonstrativo
           </button>
+          -->
         </form>
       </div>
     </div>
