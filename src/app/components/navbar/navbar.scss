@@ -2,26 +2,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 4rem; /* Padding generoso */
-  /* Fundo translúcido (Glassmorphism) Modern Dark SaaS */
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: none;
-  border-bottom: 1px solid transparent;
+  padding: 1.25rem 4rem;
+  /* Fundo Deep Obsidian com desfoque moderno */
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   
   &.scrolled {
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(2, 6, 23, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem 4rem; /* Reduz padding levemente */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 0.9rem 4rem;
   }
+
 
   .logo-wrapper {
     display: flex;
@@ -39,15 +39,13 @@
 
     li a {
       text-decoration: none;
-      /* Usa a variável de texto com uma leve transparência para o estado normal */
-      color: color-mix(in srgb, var(--text-color) 85%, transparent);
+      color: #94a3b8;
       font-weight: 500;
       font-size: 1rem;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+      transition: all 0.3s ease;
       position: relative;
       padding: 0.5rem 0;
 
-      /* Efeito de hover e active: Sublinhado elegante */
       &::after {
         content: '';
         position: absolute;
@@ -55,21 +53,21 @@
         height: 2px;
         bottom: 0;
         left: 0;
-        background-color: var(--accent-color); /* Dinâmico! */
+        background-color: #38bdf8;
         transition: width 0.3s ease;
         border-radius: 2px;
       }
 
       &:hover, &.active {
-        /* Brilho maior no texto */
-        color: var(--text-color);
-        text-shadow: 0 0 12px var(--primary-glow);
+        color: #38bdf8;
+        text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
 
         &::after {
           width: 100%;
         }
       }
     }
+
 
     .social-link {
       display: flex;
