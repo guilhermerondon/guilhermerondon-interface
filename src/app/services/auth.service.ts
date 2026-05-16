@@ -15,7 +15,7 @@ export class AuthService {
 
   private apiUrl = `${this.baseUrl}/api/Auth`;
 
-  public isLoggedIn = signal<boolean>(true);
+  public isLoggedIn = signal<boolean>(false);
 
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
@@ -23,7 +23,9 @@ export class AuthService {
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
-      this.isLoggedIn.set(!!token);
+      if (token) {
+        this.isLoggedIn.set(true);
+      }
     }
   }
 
