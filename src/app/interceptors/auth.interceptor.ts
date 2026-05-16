@@ -16,10 +16,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     if (token) {
       authReq = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${token}`
         }
       });
+
+      // Adiciona Content-Type apenas para métodos que enviam corpo
+      if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
+        authReq = authReq.clone({
+          setHeaders: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
     }
   }
   
