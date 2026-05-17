@@ -33,7 +33,7 @@ import { AuthService } from '../../services/auth.service';
 
           <div class="divider">ou</div>
           <button type="button" class="btn-demo" (click)="loginAsGuest()" [disabled]="isLoading">
-            Acesso Rápido (Demo)
+            Ver Demo
           </button>
         </form>
       </div>
@@ -49,9 +49,9 @@ import { AuthService } from '../../services/auth.service';
     }
 
     .glass-panel {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
       padding: 3rem;
@@ -59,6 +59,12 @@ import { AuthService } from '../../services/auth.service';
       max-width: 400px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
       text-align: center;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+
+    .glass-panel:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.15);
     }
 
     h2 {
@@ -154,13 +160,18 @@ import { AuthService } from '../../services/auth.service';
     .divider::after { right: 0; }
 
     .btn-demo {
-      background: transparent;
-      border: 1px solid #646cff;
-      color: #646cff;
+      background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)) padding-box,
+                  linear-gradient(90deg, #3b82f6, #a855f7) border-box;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: #fff;
+      transition: all 0.3s ease;
       margin-top: 0;
     }
     .btn-demo:hover:not(:disabled) {
-      background: rgba(100, 108, 255, 0.1);
+      background: linear-gradient(90deg, #3b82f6, #a855f7) padding-box,
+                  linear-gradient(90deg, #3b82f6, #a855f7) border-box;
+      color: #fff;
     }
   `]
 })
