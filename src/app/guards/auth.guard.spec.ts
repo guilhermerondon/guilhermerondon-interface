@@ -5,8 +5,8 @@ import { AuthService } from '../services/auth.service';
 import { PLATFORM_ID } from '@angular/core';
 
 describe('authGuard', () => {
-  let authService: jasmine.SpyObj<AuthService>;
-  let router: jasmine.SpyObj<Router>;
+  let authService: any;
+  let router: any;
 
   beforeEach(() => {
     const authSpy = { getToken: vi.fn() };
@@ -39,6 +39,6 @@ describe('authGuard', () => {
     const result = TestBed.runInInjectionContext(() => authGuard({} as any, {} as any));
     
     expect(result).toBe(false);
-    expect(router.navigate).toHaveBeenCalledWith(['/projetos']);
+    expect(router.navigate).toHaveBeenCalledWith(['/login']);
   });
 });
