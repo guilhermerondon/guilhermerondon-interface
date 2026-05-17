@@ -1,21 +1,52 @@
 <div class="project-card" [class.lang-csharp]="project.language === 'C#' || project.technology === 'C#'" [class.has-preview]="!!project.previewUrl">
   <div class="card-image-wrapper" (mouseenter)="isHovered.set(true)" (mouseleave)="isHovered.set(false)">
-    <!-- Placeholder ou Imagem Estática -->
-    <img [src]="project.imageUrl" [alt]="'Demonstração de ' + project.title" class="project-image" [class.hidden]="project.previewUrl && isHovered()">
-    
-    <!-- Preview Dinâmico (Vídeo ou GIF) -->
-    <ng-container *ngIf="project.previewUrl">
-      <video *ngIf="isVideo(project.previewUrl)" 
-             [src]="project.previewUrl" 
-             autoplay loop muted playsinline 
-             class="project-preview" 
-             [class.visible]="isHovered()">
-      </video>
-      <img *ngIf="!isVideo(project.previewUrl)" 
-           [src]="project.previewUrl" 
-           class="project-preview" 
-           [class.visible]="isHovered()">
-    </ng-container>
+    <div class="mockup-container" [ngClass]="'mockup-' + project.id">
+      <div class="mockup-header">
+        <div class="mac-btns">
+          <span class="mac-btn close"></span>
+          <span class="mac-btn min"></span>
+          <span class="mac-btn max"></span>
+        </div>
+        <div class="mockup-title">
+          <span *ngIf="project.id === 1">bash - python main.py</span>
+          <span *ngIf="project.id === 2">NotificationPayload.cs - VS Code</span>
+          <span *ngIf="project.id === 3">bash - go run deploy.go</span>
+        </div>
+      </div>
+      
+      <div class="mockup-body font-mono">
+        <!-- Python (ID 1) -->
+        <ng-container *ngIf="project.id === 1">
+          <div class="log-line">INFO:     Started server process [1024]</div>
+          <div class="log-line">INFO:     Waiting for application startup.</div>
+          <div class="log-line">INFO:     Application startup complete.</div>
+          <div class="log-line success">INFO:     "POST /transactions HTTP/1.1" 200 OK</div>
+          <div class="log-line prompt">~ $ <span class="cursor">_</span></div>
+        </ng-container>
+
+        <!-- C# (ID 2) -->
+        <ng-container *ngIf="project.id === 2">
+          <div class="code-line"><span class="keyword">using</span> System;</div>
+          <div class="code-line"><span class="keyword">namespace</span> <span class="namespace">FinanceCore.Domain</span>;</div>
+          <br>
+          <div class="code-line"><span class="keyword">public record</span> <span class="class-name">NotificationPayload</span></div>
+          <div class="code-line">{{ '{' }}</div>
+          <div class="code-line indent"><span class="keyword">public</span> <span class="type">Guid</span> Id {{ '{' }} <span class="keyword">get</span>; <span class="keyword">init</span>; {{ '}' }}</div>
+          <div class="code-line indent"><span class="keyword">public</span> <span class="type">string</span> Message {{ '{' }} <span class="keyword">get</span>; <span class="keyword">init</span>; {{ '}' }}</div>
+          <div class="code-line">{{ '}' }}</div>
+        </ng-container>
+
+        <!-- Go (ID 3) -->
+        <ng-container *ngIf="project.id === 3">
+          <div class="log-line prompt">~ $ go run deploy.go --target=production</div>
+          <div class="log-line">Building binary...</div>
+          <div class="log-line">Running tests... <span class="success">[PASS]</span></div>
+          <div class="log-line">Pushing to registry... 100%</div>
+          <div class="log-line success">Deployment to production successful! 🚀</div>
+          <div class="log-line prompt">~ $ <span class="cursor">_</span></div>
+        </ng-container>
+      </div>
+    </div>
     
     <div class="badges-container">
       <span class="tech-badge" [ngClass]="languageBadgeClass">
