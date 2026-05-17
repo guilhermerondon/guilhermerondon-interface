@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { Project } from '../../models/project.model';
 import { AuthService } from '../../services/auth.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-project-card',
@@ -18,8 +19,10 @@ export class ProjectCardComponent {
   isHovered = signal(false);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private analyticsService = inject(AnalyticsService);
 
   navigateToProject() {
+    this.analyticsService.trackClick(this.project.title);
     if (this.project.id === 2) {
       // Gestor Financeiro exige Login
       if (this.authService.getToken()) {
