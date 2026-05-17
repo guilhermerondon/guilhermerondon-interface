@@ -25,30 +25,14 @@
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(0, 242, 254, 0.12);
-    border-color: rgba(0, 242, 254, 0.4);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-color: #2e3a4e;
 
-    &.lang-csharp {
-      box-shadow: 0 20px 40px rgba(192, 132, 252, 0.12);
-      border-color: rgba(192, 132, 252, 0.4);
-    }
-    
     .project-image {
       transform: scale(1.05);
     }
-
-    &.has-preview {
-      border-color: rgba(16, 185, 129, 0.5);
-      animation: pulse-emerald 2s infinite;
-    }
   }
-}
-
-@keyframes pulse-emerald {
-  0% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2), 0 10px 30px -10px rgba(0, 0, 0, 0.8); }
-  50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 10px 30px -10px rgba(0, 0, 0, 0.8); border-color: rgba(16, 185, 129, 0.8); }
-  100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2), 0 10px 30px -10px rgba(0, 0, 0, 0.8); }
 }
 
 .card-image-wrapper {
