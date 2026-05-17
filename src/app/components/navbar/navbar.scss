@@ -111,28 +111,32 @@
 
   /* Responsividade limpa para mobile */
   @media (max-width: 768px) {
-    padding: 8px 12px;
-    flex-direction: row; /* Força tudo na mesma linha */
-    flex-wrap: nowrap;
-    justify-content: space-between; /* Distribui o espaço entre o logo e os links */
-    align-items: center;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 16px !important;
+    height: auto !important;
 
     .logo-wrapper {
-      margin-bottom: 0;
-      white-space: nowrap; /* Impede que o nome quebre */
+      margin: 0 !important;
+      padding: 0 !important;
+      white-space: nowrap !important;
     }
 
     .nav-links {
-      width: auto;
-      margin-top: 0;
-      display: flex;
-      flex-direction: row;
-      gap: 10px; /* Reduz espaçamento entre os links para caber */
-      flex-wrap: nowrap;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      width: auto !important;
+      margin-top: 0 !important;
+      gap: 8px !important;
+      flex-wrap: nowrap !important;
 
       li a {
-        font-size: 14px;
-        padding: 0.2rem 0;
+        font-size: 13px !important;
+        padding: 0.2rem 0 !important;
       }
     }
   }
