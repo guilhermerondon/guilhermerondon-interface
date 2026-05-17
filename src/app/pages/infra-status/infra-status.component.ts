@@ -16,7 +16,7 @@ interface MonitorView extends Monitor {
   template: `
     <div class="status-container">
       <div class="header">
-        <h2 class="neon-text">Uptime Monitor</h2>
+        <h2 class="neon-text">Infrastructure Pulse</h2>
         <p>Monitoramento de Infraestrutura em Tempo Real</p>
       </div>
 
@@ -92,10 +92,9 @@ interface MonitorView extends Monitor {
     .neon-text {
       font-size: 2.5rem;
       margin: 0;
-      background: linear-gradient(90deg, var(--project-accent, #06b6d4), #c084fc);
+      background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #10b981 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px var(--project-glow, rgba(6, 182, 212, 0.3));
     }
 
     .header p {

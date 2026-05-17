@@ -45,7 +45,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       <div class="glass-panel">
         <div class="header">
           <div class="header-titles">
-            <h2>Finance Ledger</h2>
+            <h2>Finance Core Ledger</h2>
             <p>Visão geral das suas transações</p>
           </div>
           <button class="btn-add" (click)="toggleModal()">+ Nova Transação</button>
@@ -215,7 +215,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
     .header-titles h2 {
       margin: 0 0 0.5rem 0;
       font-size: 1.8rem;
-      background: linear-gradient(90deg, #a78bfa, #f472b6);
+      background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #10b981 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
