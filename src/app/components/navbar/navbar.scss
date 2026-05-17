@@ -76,17 +76,30 @@
       display: flex;
       align-items: center;
       margin-left: 0.5rem;
+      gap: 12px; /* Separa os ícones sociais */
 
       a {
         font-size: 1.4rem;
         color: color-mix(in srgb, var(--text-color) 85%, transparent);
         transition: all 0.3s ease;
         padding: 0;
+        display: inline-flex;
+        align-items: center;
 
         &:hover {
           color: #0077b5; /* Cor oficial LinkedIn */
           transform: translateY(-2px);
           text-shadow: 0 0 15px rgba(0, 119, 181, 0.5);
+        }
+
+        &.dio-link {
+          svg {
+            transition: all 0.3s ease;
+          }
+          &:hover {
+            color: #ffffff; /* Transição sutil para branco puro para DIO */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+          }
         }
 
         &::after {
