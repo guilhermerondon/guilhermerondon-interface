@@ -20,8 +20,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         }
       });
 
-      // Adiciona Content-Type apenas para métodos que enviam corpo
-      if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
+      // Adiciona Content-Type apenas para métodos que enviam corpo (e DELETE para evitar rejeições de payload)
+      if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) {
         authReq = authReq.clone({
           setHeaders: {
             'Content-Type': 'application/json'
