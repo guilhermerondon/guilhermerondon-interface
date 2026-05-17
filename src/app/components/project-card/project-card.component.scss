@@ -141,13 +141,16 @@
 }
 
 .btn-action {
-  padding: 0.7rem 1.2rem; /* Aumento leve para conforto visual */
+  padding: 0.7rem 1.2rem;
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
-  display: flex; /* Alinhamento Centralizado Total */
+  display: inline-flex !important;
   align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap !important; /* Corrige o bug do iPhone */
   justify-content: center;
   gap: 8px;
   line-height: 1; /* Evita que o texto pareça subido */
