@@ -27,7 +27,7 @@ export class FinanceService {
     const payload = {
       descricao: transaction.description,
       valor: Number(transaction.amount),
-      data: new Date(transaction.date).toISOString(),
+      data: transaction.date.split('T')[0],
       tipo: transaction.type
     };
     return this.http.post<Transaction>(this.apiUrl, payload);
@@ -37,7 +37,7 @@ export class FinanceService {
     const payload = {
       descricao: transaction.description,
       valor: Number(transaction.amount),
-      data: new Date(transaction.date).toISOString(),
+      data: transaction.date.split('T')[0],
       tipo: transaction.type
     };
     return this.http.put<void>(`${this.apiUrl}/${id}`, payload);
