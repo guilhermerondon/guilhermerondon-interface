@@ -609,11 +609,11 @@ export class FinanceDashboardComponent implements OnInit {
         {
           data: [this.totalIncome(), this.totalExpense()],
           backgroundColor: [
-            'rgba(167, 139, 250, 0.8)', // Roxo
+            'rgba(16, 185, 129, 0.8)',  // Verde SaaS
             'rgba(248, 113, 113, 0.8)'  // Vermelho
           ],
           borderColor: [
-            'rgba(167, 139, 250, 1)',
+            'rgba(16, 185, 129, 1)',
             'rgba(248, 113, 113, 1)'
           ],
           borderWidth: 1,
