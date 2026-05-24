@@ -1,5 +1,7 @@
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=8b5cf6&height=110&section=header&animation=fadeIn"/>
 
+![Angular CI](https://github.com/guilhermerondon/guilhermerondon-interface/actions/workflows/ci-angular.yml/badge.svg)
+
 # RONDON Core Interface
 
 Repositório do frontend unificado do ecossistema de microsserviços. Esta interface foi projetada sob a estética *Dark Obsidian*, focando em alta performance, carregamento reativo e design industrial para exibição de telemetria, dashboards financeiros e logs de sistemas em tempo real.
