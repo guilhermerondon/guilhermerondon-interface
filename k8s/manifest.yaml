@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-interface-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: core-interface
+  template:
+    metadata:
+      labels:
+        app: core-interface
+    spec:
+      containers:
+      - name: core-interface-web
+        image: guilhermerondon/core-interface:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: core-interface-service
+spec:
+  type: LoadBalancer # Expõe a interface para o mundo exterior
+  selector:
+    app: core-interface
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
