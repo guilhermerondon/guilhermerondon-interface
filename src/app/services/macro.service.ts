@@ -30,4 +30,10 @@ export class MacroService {
   calculateMacros(data: MacroRequest): Observable<MacroResponse> {
     return this.http.post<MacroResponse>(`${this.apiUrl}/macros`, data);
   }
+
+  downloadMacroReport(athleteData: any): Observable<Blob> {
+    return this.http.post(`${this.apiUrl}/api/v1/macros/report/download`, athleteData, {
+      responseType: 'blob'
+    });
+  }
 }

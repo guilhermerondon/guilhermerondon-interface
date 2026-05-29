@@ -45,4 +45,38 @@ export class MacroCalculatorComponent {
       }
     });
   }
+
+  isDownloading = signal<boolean>(false);
+
+  onDownloadReport(): void {
+    if (!this.result()) return;
+
+    this.isDownloading.set(true);
+    
+    const athleteData = {
+      calories: this.result()?.calorias_totais,
+      protein: this.result()?.proteinas,
+      carbs: this.result()?.carboidratos,
+      fat: this.result()?.gorduras
+    };
+    
+    this.macroService.downloadMacroReport(athleteData).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `rondon_athlete_report_${new Date().getTime()}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        this.isDownloading.set(false);
+      },
+      error: (err) => {
+        console.error('Erro ao baixar relatório:', err);
+        this.isDownloading.set(false);
+      }
+    });
+  }
 }

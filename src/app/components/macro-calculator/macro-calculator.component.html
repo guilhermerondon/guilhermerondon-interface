@@ -71,6 +71,15 @@
         <p>{{ result()?.sugestao_suplemento }}</p>
       </div>
     </div>
+
+    <div class="report-actions" style="margin-top: 1.5rem; text-align: center;">
+      <button 
+        class="btn-submit" 
+        (click)="onDownloadReport()" 
+        [disabled]="isDownloading()">
+        {{ isDownloading() ? 'Gerando PDF...' : 'Baixar Dieta Completa' }}
+      </button>
+    </div>
   </div>
   </div>
 </div>
