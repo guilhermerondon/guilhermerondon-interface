@@ -3,14 +3,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 4rem;
-  /* Fundo Deep Obsidian com desfoque moderno */
-  background: rgba(7, 10, 18, 0.6) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  position: sticky;
+  
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(3, 3, 3, 0.3);
+  
+  position: fixed;
   top: 0;
-  z-index: 100;
+  width: 100%;
+  z-index: 1000;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   
   &.scrolled {

@@ -1,18 +1,23 @@
 .hero-container {
-  min-height: calc(100vh - 80px);
+  /* Cor base hiper escura */
+  background-color: #030303;
+  
+  /* Gradiente radial: cria uma "luz" sutil no centro (tons de roxo/azul bem escuros) que some para o preto nas bordas */
+  background-image: radial-gradient(
+    ellipse at 50% 40%, 
+    rgba(35, 20, 60, 0.4) 0%, /* Centro com um brilho escuro imersivo */
+    rgba(15, 15, 20, 0.8) 40%, 
+    rgba(3, 3, 3, 1) 80% /* Bordas fundindo com o preto absoluto */
+  );
+  
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
   position: relative;
   overflow: hidden;
-  
-  /* SaaS High-End: Subtle Grid Background */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: center center;
 }
 
 /* Efeito de brilho sutil atrás do texto principal (Opcional Vercel style) */
