@@ -84,14 +84,3 @@ body.modal-open {
   max-width: 1000px;
   margin: 0 auto;
 }
-
-/* Pseudo-elemento para offset perfeito do Navbar Fixo */
-.projects-container::before, 
-.about-container::before {
-  content: "";
-  display: block;
-  height: 100px; /* Altura do seu Navbar + respiro */
-  margin-top: -100px; /* Puxa a margem de volta para não quebrar o layout visual */
-  visibility: hidden;
-  pointer-events: none;
-}
