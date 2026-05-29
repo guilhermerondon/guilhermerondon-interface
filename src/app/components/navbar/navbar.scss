@@ -2,14 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 4rem;
   
-  position: relative; /* Volta ao fluxo normal do HTML */
-  background-color: transparent; /* Mantém a unificação com o fundo escuro do Hero */
-  border-bottom: none;
-  box-shadow: none;
+  position: relative;
+  background-color: transparent;
   width: 100%;
-  padding: 20px 0; /* Ajuste o respiro interno se necessário */
+  max-width: 1000px; /* Alinhado com .home-container */
+  margin: 0 auto;
+  padding: 30px 20px;
   
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   

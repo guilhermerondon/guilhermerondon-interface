@@ -19,4 +19,14 @@ export class NavbarComponent {
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50;
   }
+
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback in case they are on a different routed page
+      this.router.navigate(['/' + sectionId]);
+    }
+  }
 }
