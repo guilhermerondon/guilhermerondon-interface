@@ -4,17 +4,13 @@
   align-items: center;
   padding: 1.25rem 4rem;
   
-  background: transparent;
+  position: relative; /* Volta ao fluxo normal do HTML */
+  background-color: transparent; /* Mantém a unificação com o fundo escuro do Hero */
   border-bottom: none;
   box-shadow: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background-color: rgba(3, 3, 3, 0.3);
-  
-  position: fixed;
-  top: 0;
   width: 100%;
-  z-index: 1000;
+  padding: 20px 0; /* Ajuste o respiro interno se necessário */
+  
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   
   &.scrolled {
