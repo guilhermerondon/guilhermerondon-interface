@@ -30,6 +30,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
   /* Garante que o fundo cubra toda a área no iOS */
   background-color: #000000;
 }
@@ -83,4 +84,10 @@ body.modal-open {
   padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+/* Padding para compensar o Navbar Fixo */
+section, .projects-container, .about-container {
+  padding-top: 100px; /* Empurra o conteúdo para baixo do Navbar */
+  padding-bottom: 60px; /* Mantém um respiro no final */
 }
