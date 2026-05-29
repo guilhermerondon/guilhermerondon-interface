@@ -21,7 +21,7 @@ jobs:
         cache: 'npm'
 
     - name: Instalar Dependências
-      run: npm ci
+      run: npm ci --legacy-peer-deps
 
     - name: Compilar Projeto (Build de Produção)
       run: npm run build -- --configuration production
