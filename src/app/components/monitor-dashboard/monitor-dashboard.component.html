@@ -1,0 +1,10 @@
+<div class="monitor-card" *ngIf="liveData">
+  <h3>{{ liveData.service }}</h3>
+  
+  <div class="status-indicator">
+    <span class="dot" [class]="liveData.status"></span>
+    <span class="status-text">{{ liveData.status | uppercase }}</span>
+  </div>
+  
+  <p class="latency">Latência: {{ liveData.latency_ms }} ms</p>
+</div>
