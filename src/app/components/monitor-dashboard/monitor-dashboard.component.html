@@ -1,10 +1,27 @@
-<div class="monitor-card" *ngIf="liveData">
-  <h3>{{ liveData.service }}</h3>
-  
-  <div class="status-indicator">
-    <span class="dot" [class]="liveData.status"></span>
-    <span class="status-text">{{ liveData.status | uppercase }}</span>
+<section class="monitor-section">
+  <div class="monitor-header">
+    <h2>Status da Infraestrutura</h2>
+    <p>Monitoramento em tempo real via WebSockets (Go)</p>
   </div>
-  
-  <p class="latency">Latência: {{ liveData.latency_ms }} ms</p>
-</div>
+
+  <div class="monitor-grid">
+    <div class="monitor-card" *ngIf="liveData">
+      <div class="card-header">
+        <h3>{{ liveData.service }}</h3>
+        <div class="status-indicator">
+          <span class="dot" [ngClass]="liveData.status"></span>
+          <span class="status-text" [ngClass]="liveData.status + '-text'">
+            {{ liveData.status | uppercase }}
+          </span>
+        </div>
+      </div>
+      
+      <div class="card-body">
+        <div class="metric">
+          <span class="metric-label">Latência</span>
+          <span class="metric-value">{{ liveData.latency_ms }} ms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
