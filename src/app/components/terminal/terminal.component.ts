@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'gr-terminal',
   imports: [CommonModule],
-  templateUrl: './terminal.html',
-  styleUrl: './terminal.scss',
+  templateUrl: './terminal.component.html',
+  styleUrl: './terminal.component.scss',
 })
-export class Terminal implements OnInit {
+export class TerminalComponent implements OnInit {
   public devProfile = {
     name: 'Guilherme Rondon',
     age: 24,
