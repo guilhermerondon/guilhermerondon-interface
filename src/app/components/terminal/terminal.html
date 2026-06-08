@@ -1,0 +1,22 @@
+<div class="terminal-container">
+  <div class="terminal-header">
+    <div class="terminal-btn close"></div>
+    <div class="terminal-btn minimize"></div>
+    <div class="terminal-btn maximize"></div>
+    <span class="terminal-title">bash -- guilhermerondon@portfolio</span>
+  </div>
+  <div class="terminal-body">
+    <div class="terminal-line">
+      <span class="prompt-symbol">&gt;</span>
+      <span class="command-text">{{ typedCommand }}</span>
+      <span class="cursor" *ngIf="isTyping"></span>
+    </div>
+    <div class="terminal-output" *ngIf="showJson">
+      <pre><code>{{ devProfile | json }}</code></pre>
+      <div class="terminal-line mt-2">
+        <span class="prompt-symbol">&gt;</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+.terminal-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  color: #d4d4d4;
+}
+
+.terminal-header {
+  background-color: #323233;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+
+  &.close {
+    background-color: #ff5f56;
+  }
+  &.minimize {
+    background-color: #ffbd2e;
+  }
+  &.maximize {
+    background-color: #27c93f;
+  }
+}
+
+.terminal-title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #858585;
+  margin-left: -50px; /* compensar os botões para centralizar */
+}
+
+.terminal-body {
+  padding: 20px;
+  min-height: 300px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.terminal-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.prompt-symbol {
+  color: #4af626; /* hacker green */
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.command-text {
+  color: #d4d4d4;
+}
+
+.terminal-output {
+  margin-top: 10px;
+
+  pre {
+    margin: 0;
+    color: #4af626; /* Cor verde para o JSON */
+  }
+}
+
+.mt-2 {
+  margin-top: 10px;
+}
+
+/* Typing Effect Cursor Animation */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background-color: #d4d4d4;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
