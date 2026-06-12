@@ -2,11 +2,12 @@ import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppLogoComponent } from '../app-logo/app-logo.component';
+import { ChangelogComponent } from '../changelog/changelog.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, AppLogoComponent],
+  imports: [RouterLink, RouterLinkActive, CommonModule, AppLogoComponent, ChangelogComponent],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })

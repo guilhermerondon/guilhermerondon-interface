@@ -1,34 +1,36 @@
-/* Botão flutuante */
+/* Container principal */
+.changelog-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botão na Navbar */
 .changelog-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
   background: rgba(30, 30, 40, 0.85);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
   border-radius: 30px;
-  padding: 10px 16px;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     background: rgba(40, 40, 50, 0.95);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
 
   .icon {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .version-tag {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.5px;
     background: linear-gradient(135deg, #00f2fe, #4facfe);
@@ -37,23 +39,25 @@
   }
 }
 
-/* Painel flutuante */
+/* Painel flutuante Dropdown */
 .changelog-panel {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 350px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  width: 320px;
   max-height: 400px;
-  background: rgba(22, 22, 28, 0.95);
+  background: rgba(22, 22, 28, 0.98); /* Fundo sólido elegante */
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 999;
   overflow: hidden;
-  animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideDownFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
 
   .panel-header {
     display: flex;
@@ -65,7 +69,7 @@
     h3 {
       margin: 0;
       color: #fff;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
     }
 
@@ -73,7 +77,7 @@
       background: none;
       border: none;
       color: #888;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       cursor: pointer;
       padding: 0;
       transition: color 0.2s;
@@ -177,16 +181,16 @@
     .update-text {
       margin: 0;
       color: #ccc;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       line-height: 1.4;
     }
   }
 }
 
-@keyframes slideUpFade {
+@keyframes slideDownFade {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;

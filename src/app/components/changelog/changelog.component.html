@@ -1,24 +1,27 @@
-<!-- Floating button -->
-<button class="changelog-btn" (click)="togglePopup()">
-  <span class="icon">🔔</span>
-  <span class="version-tag">v1.2.0</span>
-</button>
+<!-- Changelog Wrapper (Container Principal) -->
+<div class="changelog-wrapper">
+  <!-- Navbar button -->
+  <button class="changelog-btn" (click)="togglePopup()">
+    <span class="icon">🔔</span>
+    <span class="version-tag">v1.2.0</span>
+  </button>
 
-<!-- Changelog Popup Panel -->
-<div class="changelog-panel" *ngIf="isPopupOpen">
-  <div class="panel-header">
-    <h3>Atualizações do Sistema</h3>
-    <button class="close-btn" (click)="closePopup()">✕</button>
-  </div>
-  
-  <div class="panel-body">
-    <div class="update-item" *ngFor="let update of updates">
-      <div class="update-meta">
-        <span class="update-date">{{ update.data }}</span>
-        <span class="update-badge" [ngClass]="update.tipo.toLowerCase()">{{ update.tipo }}</span>
-        <span class="update-version">{{ update.version }}</span>
+  <!-- Changelog Popup Panel -->
+  <div class="changelog-panel" *ngIf="isPopupOpen">
+    <div class="panel-header">
+      <h3>Atualizações do Sistema</h3>
+      <button class="close-btn" (click)="closePopup()">✕</button>
+    </div>
+    
+    <div class="panel-body">
+      <div class="update-item" *ngFor="let update of updates">
+        <div class="update-meta">
+          <span class="update-date">{{ update.data }}</span>
+          <span class="update-badge" [ngClass]="update.tipo.toLowerCase()">{{ update.tipo }}</span>
+          <span class="update-version">{{ update.version }}</span>
+        </div>
+        <p class="update-text">{{ update.texto }}</p>
       </div>
-      <p class="update-text">{{ update.texto }}</p>
     </div>
   </div>
 </div>
