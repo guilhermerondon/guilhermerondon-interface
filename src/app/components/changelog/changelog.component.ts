@@ -12,9 +12,10 @@ export class ChangelogComponent {
   public isPopupOpen = false;
 
   public updates = [
-    { data: 'Hoje', version: 'v1.2.0', tipo: 'Feature', texto: 'Adicionado Terminal Interativo dinâmico na seção Sobre Mim.' },
-    { data: 'Ontem', version: 'v1.1.5', tipo: 'Security', texto: 'Implementação de Rate Limiting e Filtro de Bots (SecOps).' },
-    { data: 'Recente', version: 'v1.1.0', tipo: 'Infra', texto: 'Otimização de DNS e blindagem de banco de dados no Supabase (RLS).' }
+    { data: 'Hoje', version: 'v1.2.0', tipo: 'Feature', texto: 'Lançamento do Web CLI Interativo, Menu Glassmorphism e Widget de Changelog global.' },
+    { data: 'Recente', version: 'v1.1.5', tipo: 'Security', texto: 'Implementação de Rate Limiting (60 req/min) e Filtro Global contra Bots/Crawlers na API C#.' },
+    { data: 'Anterior', version: 'v1.1.0', tipo: 'Backend', texto: 'Desenvolvimento da API Rest em ASP.NET Core, integração com PostgreSQL e conteinerização com Docker.' },
+    { data: 'Legado', version: 'v1.0.0', tipo: 'Release', texto: 'Lançamento inicial da interface do portfólio construída em Angular com design system dark neon.' }
   ];
 
   togglePopup() {
