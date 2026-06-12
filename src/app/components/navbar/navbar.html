@@ -2,25 +2,41 @@
   <div class="logo-wrapper" [routerLink]="'/'">
     <app-logo></app-logo>
   </div>
-  <ul class="nav-links">
-    <li><a [routerLink]="'/'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-    <li><a style="cursor: pointer;" (click)="scrollToSection('projetos')">Projetos</a></li>
-    <li><a style="cursor: pointer;" (click)="scrollToSection('sobre')">Sobre</a></li>
+  
+  <ul class="nav-links" [class.open]="isMobileMenuOpen">
+    <li><a [routerLink]="'/'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a></li>
+    <li><a style="cursor: pointer;" (click)="scrollToSection('projetos'); closeMobileMenu()">Projetos</a></li>
+    <li><a style="cursor: pointer;" (click)="scrollToSection('sobre'); closeMobileMenu()">Sobre</a></li>
     <li class="social-link">
-      <a href="https://www.linkedin.com/in/guilherme-rondon-5476a5195" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/guilherme-rondon-5476a5195" target="_blank" rel="noopener noreferrer" (click)="closeMobileMenu()">
         <i class="fab fa-linkedin"></i>
       </a>
       <a href="https://web.dio.me/users/worktradestudygrra?tab=achievements" 
          target="_blank" 
          rel="noopener noreferrer" 
-         class="social-icon dio-link">
+         class="social-icon dio-link"
+         (click)="closeMobileMenu()">
          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
          </svg>
       </a>
     </li>
-    <li class="changelog-nav-item">
-      <app-changelog></app-changelog>
-    </li>
   </ul>
+
+  <div class="navbar-actions">
+    <div class="changelog-nav-item">
+      <app-changelog></app-changelog>
+    </div>
+    <button class="hamburger-btn" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+      <svg *ngIf="!isMobileMenuOpen" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <svg *ngIf="isMobileMenuOpen" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
 </nav>

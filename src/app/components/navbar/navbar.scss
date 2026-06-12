@@ -21,11 +21,10 @@
     padding: 0.9rem 4rem;
   }
 
-
   .logo-wrapper {
     display: flex;
     align-items: center;
-    padding-left: 0.5rem; /* Alinhamento elegante à esquerda */
+    padding-left: 0.5rem;
     cursor: pointer;
   }
 
@@ -35,6 +34,7 @@
     gap: 2.5rem;
     margin: 0;
     padding: 0;
+    align-items: center;
 
     li a {
       text-decoration: none;
@@ -70,12 +70,11 @@
     li:nth-child(2) a::after { background-color: #1ad1f5; }
     li:nth-child(3) a::after { background-color: #34f59c; }
 
-
     .social-link {
       display: flex;
       align-items: center;
       margin-left: 0.5rem;
-      gap: 12px; /* Separa os ícones sociais */
+      gap: 12px;
 
       a {
         font-size: 1.4rem;
@@ -86,7 +85,7 @@
         align-items: center;
 
         &:hover {
-          color: #0077b5; /* Cor oficial LinkedIn */
+          color: #0077b5;
           transform: translateY(-2px);
           text-shadow: 0 0 15px rgba(0, 119, 181, 0.5);
         }
@@ -96,7 +95,7 @@
             transition: all 0.3s ease;
           }
           &:hover {
-            color: #ffffff; /* Transição sutil para branco puro para DIO */
+            color: #ffffff;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
           }
         }
@@ -108,48 +107,93 @@
     }
   }
 
-  /* Responsividade limpa para mobile */
-  @media (max-width: 768px) {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 10px 16px !important;
-    height: auto !important;
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    .hamburger-btn {
+      display: none; /* Hide on desktop */
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 5px;
+      transition: transform 0.2s;
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
 
-    .logo-wrapper {
-      margin: 0 !important;
-      padding: 0 !important;
-      white-space: nowrap !important;
+  /* Breakpoint para Mobile */
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+    
+    &.scrolled {
+      padding: 10px 20px;
+    }
+
+    .navbar-actions {
+      .hamburger-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .nav-links {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
-      width: auto !important;
-      margin-top: 0 !important;
-      gap: 8px !important;
-      flex-wrap: nowrap !important;
+      display: none; /* Hide default nav on mobile */
+      
+      &.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.98); /* Fundo escuro */
+        backdrop-filter: blur(10px);
+        padding: 20px 0;
+        gap: 1.5rem;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 1000;
+        animation: slideDown 0.3s ease;
 
-      li a {
-        font-size: 13px !important;
-        padding: 0.2rem 0 !important;
+        li a {
+          font-size: 1.2rem;
+        }
+        
+        .social-link {
+          margin-left: 0;
+          margin-top: 10px;
+          gap: 20px;
+          
+          a {
+            font-size: 1.8rem;
+          }
+        }
       }
     }
   }
 
   @media (max-width: 480px) {
-    padding: 10px 12px;
-    .nav-links {
-      gap: 8px;
-      li a {
-        font-size: 13px;
-      }
-      .social-link a {
-        font-size: 1.1rem;
-      }
+    padding: 10px 15px;
+    &.scrolled {
+      padding: 10px 15px;
     }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -13,8 +13,17 @@ import { ChangelogComponent } from '../changelog/changelog.component';
 })
 export class NavbarComponent {
   isScrolled = false;
+  isMobileMenuOpen = false;
 
   constructor(private router: Router) {}
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
