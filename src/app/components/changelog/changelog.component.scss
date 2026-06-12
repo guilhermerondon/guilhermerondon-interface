@@ -163,16 +163,28 @@
           border: 1px solid rgba(79, 172, 254, 0.3);
         }
         
-        &.security {
+        &.security, &.bugfix {
           background: rgba(255, 75, 75, 0.15);
           color: #ff4b4b;
           border: 1px solid rgba(255, 75, 75, 0.3);
         }
         
-        &.infra {
+        &.infra, &.refactor {
           background: rgba(255, 184, 0, 0.15);
           color: #ffb800;
           border: 1px solid rgba(255, 184, 0, 0.3);
+        }
+
+        &.ui-ux {
+          background: rgba(255, 110, 199, 0.15);
+          color: #ff6ec7;
+          border: 1px solid rgba(255, 110, 199, 0.3);
+        }
+
+        &.docs, &.chore, &.default {
+          background: rgba(148, 163, 184, 0.15);
+          color: #94a3b8;
+          border: 1px solid rgba(148, 163, 184, 0.3);
         }
       }
     }

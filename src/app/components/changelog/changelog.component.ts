@@ -1,22 +1,74 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-changelog',
   standalone: true,
   imports: [CommonModule],
+  providers: [DatePipe],
   templateUrl: './changelog.component.html',
   styleUrl: './changelog.component.scss'
 })
-export class ChangelogComponent {
+export class ChangelogComponent implements OnInit {
   public isPopupOpen = false;
+  public updates: any[] = [];
+  
+  private http = inject(HttpClient);
+  private datePipe = inject(DatePipe);
 
-  public updates = [
-    { data: 'Hoje', version: 'v1.2.0', tipo: 'Feature', texto: 'Lançamento do Web CLI Interativo, Menu Glassmorphism e Widget de Changelog global.' },
-    { data: 'Recente', version: 'v1.1.5', tipo: 'Security', texto: 'Implementação de Rate Limiting (60 req/min) e Filtro Global contra Bots/Crawlers na API C#.' },
-    { data: 'Anterior', version: 'v1.1.0', tipo: 'Backend', texto: 'Desenvolvimento da API Rest em ASP.NET Core, integração com PostgreSQL e conteinerização com Docker.' },
-    { data: 'Legado', version: 'v1.0.0', tipo: 'Release', texto: 'Lançamento inicial da interface do portfólio construída em Angular com design system dark neon.' }
-  ];
+  ngOnInit(): void {
+    this.fetchCommits();
+  }
+
+  fetchCommits(): void {
+    this.http.get<any[]>('https://api.github.com/repos/guilhermerondon/guilhermerondon-interface/commits?per_page=5')
+      .subscribe({
+        next: (commits) => {
+          this.updates = commits.map(item => {
+            const message = item.commit.message;
+            let tipo = 'Atualização';
+            let cssClass = 'default';
+            
+            const lowerMsg = message.toLowerCase();
+            if (lowerMsg.startsWith('feat')) {
+              tipo = 'Feature';
+              cssClass = 'feature';
+            } else if (lowerMsg.startsWith('fix') || lowerMsg.startsWith('bugfix')) {
+              tipo = 'Bugfix';
+              cssClass = 'bugfix';
+            } else if (lowerMsg.startsWith('style') || lowerMsg.startsWith('ui')) {
+              tipo = 'UI/UX';
+              cssClass = 'ui-ux';
+            } else if (lowerMsg.startsWith('refactor')) {
+              tipo = 'Refactor';
+              cssClass = 'refactor';
+            } else if (lowerMsg.startsWith('docs')) {
+              tipo = 'Docs';
+              cssClass = 'docs';
+            } else if (lowerMsg.startsWith('chore')) {
+              tipo = 'Chore';
+              cssClass = 'chore';
+            }
+            
+            return {
+              data: this.datePipe.transform(item.commit.author.date, 'dd/MM/yyyy') || 'Recente',
+              version: item.sha.substring(0, 7),
+              tipo: tipo,
+              cssClass: cssClass,
+              texto: message
+            };
+          });
+        },
+        error: (err) => {
+          console.error('Failed to fetch github commits', err);
+          // Fallback just in case API fails
+          this.updates = [
+            { data: 'Hoje', version: 'v1.2.0', tipo: 'Feature', cssClass: 'feature', texto: 'Lançamento do Web CLI Interativo, Menu Glassmorphism e Widget de Changelog global.' }
+          ];
+        }
+      });
+  }
 
   togglePopup() {
     this.isPopupOpen = !this.isPopupOpen;

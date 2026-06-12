@@ -16,7 +16,7 @@
       <div class="update-item" *ngFor="let update of updates">
         <div class="update-meta">
           <span class="update-date">{{ update.data }}</span>
-          <span class="update-badge" [ngClass]="update.tipo.toLowerCase()">{{ update.tipo }}</span>
+          <span class="update-badge" [ngClass]="update.cssClass">{{ update.tipo }}</span>
           <span class="update-version">{{ update.version }}</span>
         </div>
         <p class="update-text">{{ update.texto }}</p>
