@@ -1,12 +1,13 @@
 import { Component, signal, effect, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ChangelogComponent } from './components/changelog/changelog.component';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet, NavbarComponent, ChangelogComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
