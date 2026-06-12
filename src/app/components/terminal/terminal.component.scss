@@ -41,62 +41,79 @@
   text-align: center;
   font-size: 0.85rem;
   color: #858585;
-  margin-left: -50px; /* compensar os botões para centralizar */
+  margin-left: -50px;
 }
 
 .terminal-body {
   padding: 20px;
-  min-height: 300px;
+  height: 350px;
+  overflow-y: auto;
   font-size: 0.95rem;
   line-height: 1.5;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+}
+
+.history-item {
+  margin-bottom: 8px;
 }
 
 .terminal-line {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  
+  .prompt-text {
+    color: #4af626; /* hacker green */
+    font-weight: bold;
+    word-break: break-all;
+  }
+  
+  .prompt-symbol {
+    color: #4af626;
+    font-weight: bold;
+    margin-right: 10px;
+    white-space: nowrap;
+  }
 }
 
-.prompt-symbol {
-  color: #4af626; /* hacker green */
-  margin-right: 10px;
-  font-weight: bold;
+.active-line {
+  margin-top: 8px;
 }
 
-.command-text {
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
   color: #d4d4d4;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  caret-color: #d4d4d4;
 }
 
 .terminal-output {
-  margin-top: 10px;
-
+  margin-top: 4px;
+  margin-bottom: 8px;
+  
   pre {
     margin: 0;
-    color: #4af626; /* Cor verde para o JSON */
+    color: #4af626;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 4px;
   }
-}
 
-.mt-2 {
-  margin-top: 10px;
-}
-
-/* Typing Effect Cursor Animation */
-.cursor {
-  display: inline-block;
-  width: 8px;
-  height: 18px;
-  background-color: #d4d4d4;
-  margin-left: 2px;
-  animation: blink 1s step-end infinite;
-  vertical-align: middle;
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
+  .text-output {
+    color: #d4d4d4;
+    white-space: pre-wrap;
   }
 }

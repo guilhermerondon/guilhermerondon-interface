@@ -3,20 +3,32 @@
     <div class="terminal-btn close"></div>
     <div class="terminal-btn minimize"></div>
     <div class="terminal-btn maximize"></div>
-    <span class="terminal-title">bash -- guilhermerondon@portfolio</span>
+    <span class="terminal-title">bash -- visitor@guilhermerondon</span>
   </div>
-  <div class="terminal-body">
-    <div class="terminal-line">
-      <span class="prompt-symbol">&gt;</span>
-      <span class="command-text">{{ typedCommand }}</span>
-      <span class="cursor" *ngIf="isTyping"></span>
-    </div>
-    <div class="terminal-output" *ngIf="showJson">
-      <pre><code>{{ devProfile | json }}</code></pre>
-      <div class="terminal-line mt-2">
-        <span class="prompt-symbol">&gt;</span>
-        <span class="cursor"></span>
+  <div class="terminal-body" #terminalBody>
+    <!-- Historic Commands -->
+    <div class="history-item" *ngFor="let item of commandHistory">
+      <div class="terminal-line" *ngIf="item.prompt">
+        <span class="prompt-text">{{ item.prompt }}</span>
       </div>
+      <div class="terminal-output" *ngIf="item.output">
+        <pre *ngIf="item.isJson"><code>{{ item.output | json }}</code></pre>
+        <div *ngIf="!item.isJson" class="text-output">{{ item.output }}</div>
+      </div>
+    </div>
+    
+    <!-- Active Input Line -->
+    <div class="terminal-line active-line">
+      <span class="prompt-symbol">visitor@guilhermerondon:~$</span>
+      <input 
+        type="text" 
+        class="terminal-input" 
+        [(ngModel)]="currentInput" 
+        (keyup.enter)="executeCommand()" 
+        autofocus
+        autocomplete="off"
+        spellcheck="false"
+      />
     </div>
   </div>
 </div>
