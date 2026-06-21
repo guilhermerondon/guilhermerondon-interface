@@ -32,10 +32,14 @@ export class LanguageService {
   public text = computed(() => this.translations[this.currentLang()]);
 
   constructor() {
-    // Optionally set language from browser, but the instruction asks to default to 'pt' or browser
-    const browserLang = navigator.language.split('-')[0];
-    if (browserLang === 'en') {
-      this.currentLang.set('en');
+    const isBrowser = typeof window !== 'undefined' && typeof navigator !== 'undefined';
+    if (isBrowser) {
+      const browserLang = navigator.language.toLowerCase();
+      if (browserLang.includes('en')) {
+        this.currentLang.set('en');
+      } else {
+        this.currentLang.set('pt');
+      }
     }
   }
 
