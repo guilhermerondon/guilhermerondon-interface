@@ -5,9 +5,16 @@
   
   <div class="navbar-menu-container">
     <ul class="nav-links" [class.open]="isMobileMenuOpen">
-      <li><a [routerLink]="'/'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a></li>
-      <li><a style="cursor: pointer;" (click)="scrollToSection('projetos'); closeMobileMenu()">Projetos</a></li>
-      <li><a style="cursor: pointer;" (click)="scrollToSection('sobre'); closeMobileMenu()">Sobre</a></li>
+      <li><a [routerLink]="'/'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">{{ langService.text().nav_home }}</a></li>
+      <li><a style="cursor: pointer;" (click)="scrollToSection('projetos'); closeMobileMenu()">{{ langService.text().nav_projects }}</a></li>
+      <li><a style="cursor: pointer;" (click)="scrollToSection('sobre'); closeMobileMenu()">{{ langService.text().nav_about }}</a></li>
+      <li class="lang-selector-container">
+        <button class="lang-btn" (click)="toggleLanguage()">
+          <span [class.active-lang]="langService.currentLang() === 'pt'" [class.inactive-lang]="langService.currentLang() !== 'pt'">PT</span>
+          <span class="lang-divider">|</span>
+          <span [class.active-lang]="langService.currentLang() === 'en'" [class.inactive-lang]="langService.currentLang() !== 'en'">EN</span>
+        </button>
+      </li>
       <li class="social-link">
         <a href="https://www.linkedin.com/in/guilherme-rondon-5476a5195" target="_blank" rel="noopener noreferrer" (click)="closeMobileMenu()">
           <i class="fab fa-linkedin"></i>

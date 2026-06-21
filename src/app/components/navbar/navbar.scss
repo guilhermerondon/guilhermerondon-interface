@@ -105,6 +105,53 @@
         }
       }
     }
+
+    .lang-selector-container {
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+
+      .lang-btn {
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid rgba(156, 66, 245, 0.3);
+        border-radius: 20px;
+        padding: 4px 12px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.85rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-color: rgba(156, 66, 245, 0.8);
+          box-shadow: 0 0 12px rgba(156, 66, 245, 0.3);
+        }
+
+        .lang-divider {
+          color: #4b5563;
+          font-size: 0.8rem;
+        }
+
+        span {
+          transition: all 0.3s ease;
+        }
+
+        .active-lang {
+          color: #9c42f5; /* roxa/neon */
+          font-weight: 600;
+          text-shadow: 0 0 8px rgba(156, 66, 245, 0.6);
+        }
+
+        .inactive-lang {
+          color: #64748b;
+          font-weight: 400;
+          opacity: 0.6;
+        }
+      }
+    }
   }
 
   .navbar-menu-container {

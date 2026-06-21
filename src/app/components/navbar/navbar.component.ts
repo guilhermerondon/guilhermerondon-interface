@@ -1,8 +1,9 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppLogoComponent } from '../app-logo/app-logo.component';
 import { ChangelogComponent } from '../changelog/changelog.component';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +13,15 @@ import { ChangelogComponent } from '../changelog/changelog.component';
   styleUrl: './navbar.scss',
 })
 export class NavbarComponent {
+  public langService = inject(LanguageService);
   isScrolled = false;
   isMobileMenuOpen = false;
 
   constructor(private router: Router) {}
+
+  toggleLanguage(): void {
+    this.langService.toggleLanguage();
+  }
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

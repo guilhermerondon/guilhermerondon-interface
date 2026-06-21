@@ -1,6 +1,7 @@
-import { Component, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewChecked, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'gr-terminal',
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class TerminalComponent implements AfterViewChecked {
   @ViewChild('terminalBody') private terminalBody!: ElementRef;
 
+  public langService = inject(LanguageService);
   public currentInput: string = '';
   public commandHistory: { prompt: string; output: string | any; isJson: boolean }[] = [];
 

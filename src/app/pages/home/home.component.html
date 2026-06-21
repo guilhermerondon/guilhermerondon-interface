@@ -5,10 +5,10 @@
       <span>Sistemas Escaláveis & Alta Performance</span>
     </div>
     
-    <h1>Arquitetura de Software e <br><span class="highlight">Desenvolvimento Full Stack</span></h1>
+    <h1>{{ langService.text().hero_title }}</h1>
     
     <p class="subtitle">
-      Engenharia de Sistemas focada em backends de alta performance (Python, C#, Go) e interfaces modernas em Angular.
+      {{ langService.text().hero_subtitle }}
     </p>
     
     <div class="tech-marquee font-mono">
@@ -21,8 +21,8 @@
     </div>
 
     <div class="cta-group">
-      <a routerLink="/projetos" class="btn btn-primary glow-btn">Explorar Projetos</a>
-      <a routerLink="/sobre" class="btn btn-secondary">Sobre Mim</a>
+      <a routerLink="/projetos" class="btn btn-primary glow-btn">{{ langService.text().btn_projects }}</a>
+      <a routerLink="/sobre" class="btn btn-secondary">{{ langService.text().btn_about }}</a>
     </div>
   </div>
 </section>
