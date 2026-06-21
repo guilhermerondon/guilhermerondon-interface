@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MacroService, MacroRequest, MacroResponse } from '../../services/macro.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-macro-calculator',
@@ -14,6 +15,7 @@ import { MacroService, MacroRequest, MacroResponse } from '../../services/macro.
 })
 export class MacroCalculatorComponent {
   private macroService = inject(MacroService);
+  public langService = inject(LanguageService);
 
   // Estado do Formulário usando Signals do Angular 17
   request = signal<MacroRequest>({

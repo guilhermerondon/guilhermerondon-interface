@@ -59,18 +59,18 @@
   </div>
   
   <div class="card-content">
-    <h3 class="project-title">{{ project.title }}</h3>
-    <p class="project-description">{{ project.description }}</p>
+    <h3 class="project-title">{{ $any(langService.text())['p' + project.id + '_title'] || project.title }}</h3>
+    <p class="project-description">{{ $any(langService.text())['p' + project.id + '_desc'] || project.description }}</p>
     
     <div class="card-actions">
       <a *ngIf="project.id === 1" (click)="navigateToProject()" class="btn-action btn-demo" style="cursor: pointer;">
-        ▶ Ver Demo
+        ▶ {{ langService.text().projects_btn_demo }}
       </a>
       <a *ngIf="project.id === 2" (click)="navigateToProject()" class="btn-action btn-demo" style="cursor: pointer;">
-        ▶ Ver Demo
+        ▶ {{ langService.text().projects_btn_demo }}
       </a>
       <a *ngIf="project.id === 3" (click)="navigateToProject()" class="btn-action btn-demo" style="cursor: pointer;">
-        ▶ Ver Demo
+        ▶ {{ langService.text().projects_btn_demo }}
       </a>
 
       <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer" class="btn-action btn-repo">

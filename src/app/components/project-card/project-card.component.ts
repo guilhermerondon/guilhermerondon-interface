@@ -4,6 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { Project } from '../../models/project.model';
 import { AuthService } from '../../services/auth.service';
 import { AnalyticsService } from '../../services/analytics.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-project-card',
@@ -20,6 +21,7 @@ export class ProjectCardComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private analyticsService = inject(AnalyticsService);
+  public langService = inject(LanguageService);
 
   navigateToProject() {
     this.analyticsService.trackClick(this.project.title);

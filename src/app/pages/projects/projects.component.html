@@ -1,14 +1,14 @@
 <section id="projetos" class="projects-container">
   <header>
-    <h1>Meus Projetos</h1>
-    <p>Conheça as soluções Full Stack que desenvolvi, com foco em arquitetura escalável e design moderno.</p>
+    <h1>{{ langService.text().projects_title }}</h1>
+    <p>{{ langService.text().projects_subtitle }}</p>
   </header>
 
   <div class="projects-grid">
     @for (project of projects(); track project.id) {
       <app-project-card [project]="project"></app-project-card>
     } @empty {
-      <p>Nenhum projeto encontrado no momento.</p>
+      <p>{{ langService.text().projects_empty }}</p>
     }
   </div>
 
