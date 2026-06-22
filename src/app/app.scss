@@ -1,1 +1,19 @@
 /* App Global Styles */
+
+.seamless-footer {
+  background: transparent !important;
+  border: 0;
+  border-top: none;
+  box-shadow: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem;
+  margin-top: auto;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
