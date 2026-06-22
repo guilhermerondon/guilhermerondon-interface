@@ -22,9 +22,9 @@ export class ProjectService {
         id: 2,
         title: 'Gestor Financeiro Pessoal',
         description: 'Organização inteligente de receitas e despesas com foco em segurança de dados e simplicidade na gestão do capital.',
-        technology: '.NET 8',
+        technology: 'ASP.NET Core / Identity Framework',
         language: 'C#',
-        infra: 'Azure / SQL Server',
+        infra: 'PostgreSQL',
         repoUrl: 'https://github.com/guilhermerondon/finance-core-ledger',
         imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80',
         previewUrl: 'https://cdn.pixabay.com/video/2019/04/16/22754-330198083_tiny.mp4'

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, signal, inject, HostBinding } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, inject, HostBinding, afterNextRender } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfraService, Monitor, UptimeLog } from '../../services/infra.service';
 import { LanguageService } from '../../services/language.service';
@@ -61,7 +61,7 @@ interface MonitorView extends Monitor {
             <div class="empty-icon">📡</div>
             <p>Nenhum monitor configurado no momento.</p>
             <span class="empty-sub">Aguardando o primeiro pulso do motor de monitoramento (Go).</span>
-            <button class="btn-retry" (click)="ngOnInit()">Verificar Conectividade Agora</button>
+            <button class="btn-retry" (click)="iniciarMonitoramento()">Verificar Conectividade Agora</button>
           </div>
         }
       </div>
@@ -366,7 +366,19 @@ export class InfraStatusComponent implements OnInit, OnDestroy {
   public langService = inject(LanguageService);
   private subscription?: Subscription;
 
+  constructor() {
+    afterNextRender(() => {
+      this.iniciarMonitoramento();
+    });
+  }
+
   ngOnInit() {
+  }
+
+  iniciarMonitoramento() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
     // Polling nativo usando RxJS a cada 10 segundos
     this.subscription = timer(0, 10000).pipe(
       switchMap(() => this.infraService.getMonitors())

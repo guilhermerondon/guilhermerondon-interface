@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject, computed, HostBinding, Inject } from '@angular/core';
+import { Component, OnInit, signal, inject, computed, HostBinding, Inject, afterNextRender } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -653,8 +653,13 @@ export class FinanceDashboardComponent implements OnInit {
   public langService = inject(LanguageService);
   private document = inject(DOCUMENT);
 
+  constructor() {
+    afterNextRender(() => {
+      this.loadTransactions();
+    });
+  }
+
   ngOnInit() {
-    this.loadTransactions();
   }
 
   isIncome(type: string): boolean {
