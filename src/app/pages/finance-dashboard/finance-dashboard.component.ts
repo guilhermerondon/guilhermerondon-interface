@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FinanceService, Transaction } from '../../services/finance.service';
+import { LanguageService } from '../../services/language.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
@@ -45,8 +46,8 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       <div class="glass-panel">
         <div class="header">
           <div class="header-titles">
-            <h2>Finance Core Ledger</h2>
-            <p>Visão geral das suas transações</p>
+            <h2>{{ langService.text().finance_title }}</h2>
+            <p>{{ langService.text().finance_subtitle }}</p>
           </div>
           <button class="btn-add" (click)="toggleModal()">+ Nova Transação</button>
         </div>
@@ -649,6 +650,7 @@ export class FinanceDashboardComponent implements OnInit {
   };
 
   private financeService = inject(FinanceService);
+  public langService = inject(LanguageService);
   private document = inject(DOCUMENT);
 
   ngOnInit() {

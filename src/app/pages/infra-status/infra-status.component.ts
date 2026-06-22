@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, signal, inject, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfraService, Monitor, UptimeLog } from '../../services/infra.service';
+import { LanguageService } from '../../services/language.service';
 import { forkJoin, Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -16,8 +17,8 @@ interface MonitorView extends Monitor {
   template: `
     <div class="status-container">
       <div class="header">
-        <h2 class="neon-text">Infrastructure Pulse</h2>
-        <p>Monitoramento de Infraestrutura em Tempo Real</p>
+        <h2 class="neon-text">{{ langService.text().infra_title }}</h2>
+        <p>{{ langService.text().infra_subtitle }}</p>
       </div>
 
       <div class="monitors-grid">
@@ -362,6 +363,7 @@ export class InfraStatusComponent implements OnInit, OnDestroy {
   isLoading = signal<boolean>(true);
   
   private infraService = inject(InfraService);
+  public langService = inject(LanguageService);
   private subscription?: Subscription;
 
   ngOnInit() {

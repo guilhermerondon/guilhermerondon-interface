@@ -52,7 +52,11 @@ export class LanguageService {
       p2_desc: "Organização inteligente de receitas e despesas com foco em segurança de dados e simplicidade na gestão do capital.",
       // Project 3
       p3_title: "Monitor de Saúde de Infra",
-      p3_desc: "Acompanhamento em tempo real da disponibilidade dos seus serviços para garantir máxima estabilidade e performance."
+      p3_desc: "Acompanhamento em tempo real da disponibilidade dos seus serviços para garantir máxima estabilidade e performance.",
+      finance_title: "Gestor Financeiro Pessoal",
+      finance_subtitle: "Organização inteligente de receitas e despesas com foco em segurança de dados.",
+      infra_title: "Monitor de Saúde de Infra",
+      infra_subtitle: "Acompanhamento em tempo real da disponibilidade dos serviços para garantir máxima estabilidade."
     },
     en: {
       hero_title: "Software Architecture & Full Stack Development",
@@ -99,7 +103,11 @@ export class LanguageService {
       p2_desc: "Intelligent organization of income and expenses focused on data security and capital management simplicity.",
       // Project 3
       p3_title: "Infra Health Monitor",
-      p3_desc: "Real-time tracking of your services' availability to ensure maximum stability and performance."
+      p3_desc: "Real-time tracking of your services' availability to ensure maximum stability and performance.",
+      finance_title: "Personal Finance Manager",
+      finance_subtitle: "Smart organization of income and expenses focused on data security.",
+      infra_title: "Infra Health Monitor",
+      infra_subtitle: "Real-time tracking of service availability to ensure maximum stability."
     }
   };
 

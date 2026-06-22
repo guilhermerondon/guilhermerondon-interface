@@ -1,20 +1,13 @@
 /* Container principal */
 .changelog-wrapper {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
+  position: relative;
+  display: inline-block;
   background-color: rgba(10, 10, 12, 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 8px 12px;
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-
-  @media (max-width: 768px) {
-    bottom: 15px;
-    right: 15px;
-  }
 }
 
 /* Botão subtil no fundo da tela */
@@ -53,7 +46,7 @@
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5); /* Sombra para cima */
   display: flex;
   flex-direction: column;
-  z-index: 999;
+  z-index: 50;
   overflow: hidden;
   animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;

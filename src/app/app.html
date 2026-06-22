@@ -1,9 +1,11 @@
-<div [class]="currentTheme()">
+<div [class]="currentTheme()" style="min-height: 100vh; display: flex; flex-direction: column;">
   <app-navbar></app-navbar>
 
-  <main>
+  <main style="flex: 1;">
     <router-outlet></router-outlet>
   </main>
 
-  <app-changelog></app-changelog>
+  <footer style="padding: 20px; text-align: right; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: auto;">
+    <app-changelog></app-changelog>
+  </footer>
 </div>
