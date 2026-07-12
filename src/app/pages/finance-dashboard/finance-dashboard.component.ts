@@ -122,6 +122,28 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       </div>
 
       <form (ngSubmit)="saveTransaction()">
+        <div class="type-selection">
+          <button type="button" class="type-card income-card" [class.selected]="newTx.type === 'Income'" (click)="newTx.type = 'Income'">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </div>
+            <div class="card-text">
+              <span class="card-title">Entrada</span>
+              <span class="card-subtitle">+ Adicionar Receita</span>
+            </div>
+          </button>
+          
+          <button type="button" class="type-card expense-card" [class.selected]="newTx.type === 'Expense'" (click)="newTx.type = 'Expense'">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            </div>
+            <div class="card-text">
+              <span class="card-title">Saída</span>
+              <span class="card-subtitle">- Registrar Despesa</span>
+            </div>
+          </button>
+        </div>
+
         <div class="form-group">
           <label>Descrição</label>
           <input type="text" [(ngModel)]="newTx.description" name="desc" required placeholder="Ex: Supermercado">
@@ -134,19 +156,12 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
           <label>Data</label>
           <input type="date" [(ngModel)]="newTx.date" name="date" required>
         </div>
-        <div class="form-group">
-          <label>Tipo</label>
-          <select [(ngModel)]="newTx.type" name="type" required>
-            <option value="Income">Entrada</option>
-            <option value="Expense">Saída</option>
-          </select>
-        </div>
         
         <div *ngIf="errorMsg()" class="error-msg">{{ errorMsg() }}</div>
 
         <div class="drawer-actions">
           <button type="button" class="btn-cancel" (click)="toggleModal()">Cancelar</button>
-          <button type="submit" class="btn-save" [disabled]="isSaving()">
+          <button type="submit" class="btn-save" [disabled]="isSaving()" [ngClass]="newTx.type === 'Income' ? 'btn-save-income' : 'btn-save-expense'">
             {{ isSaving() ? 'Salvando...' : 'Salvar' }}
           </button>
         </div>
@@ -343,27 +358,28 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       font-weight: 600;
     }
 
-    /* Drawer Styles */
+    /* Drawer Styles (Modal Glassmorphism) */
     .drawer-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
       z-index: 999;
     }
 
     .side-drawer {
       position: fixed;
-      top: 0; right: 0; bottom: 0;
+      top: 1.5rem; right: 1.5rem; bottom: 1.5rem;
       width: 100%;
-      max-width: 400px;
-      background: rgba(20, 20, 30, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 450px;
+      background: rgba(20, 20, 30, 0.6);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
       padding: 2rem;
       z-index: 1000;
-      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
       overflow-y: auto;
@@ -371,7 +387,10 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 
     @media (max-width: 768px) {
       .side-drawer {
+        top: auto; right: 0; bottom: 0; left: 0;
         max-width: 100vw;
+        height: 90vh;
+        border-radius: 24px 24px 0 0;
       }
     }
 
@@ -379,7 +398,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding-bottom: 1rem;
     }
@@ -407,30 +426,148 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
       flex: 1;
     }
 
+    /* Type Selection Cards */
+    .type-selection {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .type-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0.6;
+      filter: grayscale(0.5);
+    }
+
+    .type-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      opacity: 0.8;
+    }
+
+    .type-card.selected {
+      opacity: 1;
+      filter: grayscale(0);
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .income-card.selected {
+      border: 2px solid #10b981;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+    }
+
+    .expense-card.selected {
+      border: 2px solid #ef4444;
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+    }
+
+    .card-icon {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .income-card .card-icon {
+      color: #34d399;
+    }
+
+    .expense-card .card-icon {
+      color: #f87171;
+    }
+
+    .income-card.selected .card-icon {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .expense-card.selected .card-icon {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .card-text {
+      text-align: center;
+    }
+
+    .card-title {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-subtitle {
+      display: block;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 480px) {
+      .type-selection {
+        flex-direction: column;
+      }
+      .type-card {
+        flex-direction: row;
+        text-align: left;
+        justify-content: flex-start;
+        padding: 1rem;
+      }
+      .card-icon {
+        margin-bottom: 0;
+        margin-right: 1rem;
+      }
+      .card-text {
+        text-align: left;
+      }
+    }
+
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .form-group label {
       display: block;
       margin-bottom: 0.5rem;
       font-size: 0.85rem;
-      color: #ccc;
+      color: #cbd5e1;
+      font-weight: 500;
     }
 
-    .form-group input, .form-group select {
+    .form-group input {
       width: 100%;
-      padding: 0.8rem;
-      background: rgba(0, 0, 0, 0.3);
+      padding: 0.8rem 1rem;
+      background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
+      border-radius: 12px;
       color: #fff;
       font-size: 1rem;
+      transition: all 0.3s ease;
     }
 
-    .form-group input:focus, .form-group select:focus {
+    .form-group input:focus {
       border-color: #a78bfa;
+      box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.2);
       outline: none;
+    }
+    
+    /* Calendar icon color override for dark mode date inputs */
+    ::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      opacity: 0.7;
     }
 
     .drawer-actions {
@@ -443,10 +580,12 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 
     .btn-cancel {
       background: transparent;
-      color: #aaa;
+      color: #94a3b8;
       border: none;
       cursor: pointer;
       padding: 0.8rem 1.2rem;
+      font-weight: 500;
+      transition: color 0.2s;
     }
 
     .btn-cancel:hover {
@@ -454,22 +593,40 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
     }
 
     .btn-save {
-      background: #646cff;
       color: white;
       border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 6px;
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      background: #646cff; /* default fallback */
     }
 
-    .btn-save:hover:not(:disabled) {
-      background: #535bf2;
+    .btn-save-income {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    .btn-save-income:hover:not(:disabled) {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-save-expense {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    }
+    .btn-save-expense:hover:not(:disabled) {
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+      transform: translateY(-1px);
     }
     
     .btn-save:disabled {
-      background: #444;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.3);
+      box-shadow: none;
       cursor: not-allowed;
+      transform: none;
     }
 
     .error-msg {
