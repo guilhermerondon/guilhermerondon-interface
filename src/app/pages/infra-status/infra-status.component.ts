@@ -27,9 +27,8 @@ interface MonitorView extends Monitor {
             <div class="card-header">
               <div class="monitor-info">
                 <h3>{{ monitor.name }}</h3>
-                <span class="url">{{ monitor.url }}</span>
               </div>
-              <div class="status-indicator">
+              <div class="status-indicator" [title]="monitor.current_status === 'Online' ? monitor.url : ''">
                 <div class="led" [ngClass]="monitor.current_status === 'Online' ? 'led-online' : 'led-offline'"></div>
                 <span class="status-text" [ngClass]="monitor.current_status === 'Online' ? 'text-online' : 'text-offline'">
                   {{ monitor.current_status }}
@@ -155,12 +154,6 @@ interface MonitorView extends Monitor {
       margin: 0 0 0.2rem 0;
       color: #fff;
       font-size: 1.2rem;
-    }
-
-    .url {
-      color: #888;
-      font-size: 0.8rem;
-      word-break: break-all;
     }
 
     .status-indicator {
